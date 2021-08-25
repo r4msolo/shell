@@ -1,0 +1,7 @@
+#!/bin/bash
+
+IPCONF=`ifconfig | grep "inet" | cut -d " " -f 10 | grep -vwE "(127.0.0.1)"| cut -d "." -f 1,2,3`
+
+nmap -sV -p 21,22,80,443,159,445,993,143,25,1105 $IPCONF.1/25 --script=vuln | egrep "(open|VULNERABLE|scan report for)"
+
+read
